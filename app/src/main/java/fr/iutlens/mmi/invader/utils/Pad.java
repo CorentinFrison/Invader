@@ -1,4 +1,4 @@
-package fr.iutlens.mmi.fight.utils;
+package fr.iutlens.mmi.invader.utils;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,6 +18,7 @@ public class Pad extends View {
     private double angle;
     private float r;
     private double length;
+    private float dx;
 
     public Pad(Context context) {
         super(context);
@@ -62,7 +63,7 @@ public class Pad extends View {
 
         canvas.drawCircle(xc,yc, r,paint);
 
-        if(length >0){
+        if(length > 0){
             float xd = (float) (xc + Math.cos(angle) * length*r);
             float yd = (float) (yc+ Math.sin(angle)* length*r);
 
@@ -84,12 +85,14 @@ public class Pad extends View {
 
         if ((event.getAction() & (MotionEvent.ACTION_UP))!=0){
             length = 0;
+            dx = 0;
             invalidate();
             return true;
         }
 
         float x = event.getX() - getWidth()/2;
         float y = event.getY() - getHeight()/2;
+        dx = x / r;
 
         this.angle = Math.atan2(y,x);
         this.length = Math.sqrt(x*x+y*y)/r;
@@ -102,4 +105,7 @@ public class Pad extends View {
     }
 
 
+    public float getDx() {
+        return dx;
+    }
 }
