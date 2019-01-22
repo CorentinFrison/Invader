@@ -39,6 +39,7 @@ public class GameView extends View implements TimerAction{
     private List<Projectile> missile;
     private List<Projectile> laser;
     private Pad pad;
+    private ArrayList<Shield> shield;
 
 
     public GameView(Context context) {
@@ -71,12 +72,22 @@ public class GameView extends View implements TimerAction{
         SpriteSheet.register(R.mipmap.missile,4,1,this.getContext());
         SpriteSheet.register(R.mipmap.laser,1,1,this.getContext());
         SpriteSheet.register(R.mipmap.canon,1,1,this.getContext());
+        SpriteSheet.register(R.mipmap.carre,1,1,this.getContext());
+
 
         transform = new Matrix();
         reverse = new Matrix();
 
         missile = new ArrayList<>();
         laser = new ArrayList<>();
+        shield = new ArrayList<>();
+
+
+        for(int i = 0; i <20; i++) {
+            for (int j = 0; j < 8; j++) {
+                shield.add(new Shield(R.mipmap.carre, 200 + i * 4, 1800 + j * 4));
+            }
+        }
 
         armada = new Armada(R.mipmap.alien,missile);
         canon = new Canon(R.mipmap.canon,800, 2200,laser);
@@ -119,13 +130,36 @@ public class GameView extends View implements TimerAction{
                 canon.setDirection(pad.getDx());
             }
 
+            testIntersection();
 
             canon.act();
 
             act(missile);
             act(laser);
+            act(shield);
 
             invalidate(); // demande à rafraichir la vue
+        }
+    }
+
+    private void testIntersection() {
+        for(Projectile p : missile){
+            RectF bbox = p.getBoundingBox();
+            for(Shield a: shield){
+                if (bbox.intersect(a.getBoundingBox())){
+                    a.hit = true;
+                    p.hit = true;
+                }
+            }
+        }
+        for(Projectile p : laser){
+            RectF bbox = p.getBoundingBox();
+            for(Shield a: shield){
+                if (bbox.intersect(a.getBoundingBox())){
+                    a.hit = true;
+                    p.hit = true;
+                }
+            }
         }
     }
 
@@ -151,6 +185,10 @@ public class GameView extends View implements TimerAction{
         for(Sprite s : laser){
             s.paint(canvas);
         }
+        for(Sprite s : shield){
+            s.paint(canvas);
+        }
+
         canon.paint(canvas);
         armada.paint(canvas);
 
