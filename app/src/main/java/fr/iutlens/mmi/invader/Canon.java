@@ -15,7 +15,7 @@ class Canon extends Sprite {
     private final List<Projectile> laser;
     private final int dxLaser;
     private final int dyLaser;
-    int vx = 0;
+    float vx = 0;
 
     Canon(int id, float x, float y, List<Projectile> laser) {
         super(id, x, y);
@@ -28,7 +28,7 @@ class Canon extends Sprite {
     @Override
     public boolean act() {
         RectF bounds = getBoundingBox();
-        int dx = vx * SPEED;
+        float dx = vx * SPEED;
         if (bounds.left+dx>0 && bounds.right+dx< GameView.SIZE_X){
             x += dx;
         } else {
@@ -37,10 +37,8 @@ class Canon extends Sprite {
         return false;
     }
 
-    public void setDirection(int i) {
-        vx += i;
-        if (vx<-1) vx = -1;
-        else if (vx>1) vx = 1;
+    public void setDirection(float dx) {
+        vx = dx;
     }
 
 

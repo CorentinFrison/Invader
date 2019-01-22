@@ -6,18 +6,21 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 
+import fr.iutlens.mmi.invader.utils.Pad;
 import fr.iutlens.mmi.invader.utils.RefreshHandler;
 import fr.iutlens.mmi.invader.utils.SpriteSheet;
 import fr.iutlens.mmi.invader.utils.TimerAction;
 
 
-public class GameView extends View implements TimerAction {
+public class GameView extends View implements TimerAction{
     private RefreshHandler timer;
 
     // taille de l'écran virtuel
@@ -35,6 +38,7 @@ public class GameView extends View implements TimerAction {
     private Canon canon;
     private List<Projectile> missile;
     private List<Projectile> laser;
+    private Pad pad;
 
 
     public GameView(Context context) {
@@ -110,6 +114,12 @@ public class GameView extends View implements TimerAction {
 
             armada.testIntersection(laser);
             armada.act();
+
+            if (pad != null){
+                canon.setDirection(pad.getDx());
+            }
+
+
             canon.act();
 
             act(missile);
@@ -181,17 +191,20 @@ public class GameView extends View implements TimerAction {
         transform.invert(reverse);
     }
 
-    public void onLeft() {
-        canon.setDirection(-1);
-    }
 
-    public void onRight(){
-        canon.setDirection(+1);
-    }
+
+
+
+
 
     public void onFire(){
         canon.fire();
 
+    }
+
+
+    public void setPad(Pad pad) {
+        this.pad = pad;
     }
 
 }
