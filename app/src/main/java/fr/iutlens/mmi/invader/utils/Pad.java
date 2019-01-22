@@ -93,6 +93,8 @@ public class Pad extends View {
         float x = event.getX() - getWidth()/2;
         float y = event.getY() - getHeight()/2;
         dx = x / r;
+        if (dx <-1) dx =-1;
+        else if (dx>1) dx =1;
 
         this.angle = Math.atan2(y,x);
         this.length = Math.sqrt(x*x+y*y)/r;

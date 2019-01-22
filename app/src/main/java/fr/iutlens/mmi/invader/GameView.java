@@ -111,10 +111,8 @@ public class GameView extends View implements TimerAction{
     public void update() {
         if (this.isShown()) { // Si la vue est visible
             timer.scheduleRefresh(30); // programme le prochain rafraichissement
-
             armada.testIntersection(laser);
             armada.act();
-
             if (pad != null){
                 canon.setDirection(pad.getDx());
             }
@@ -137,8 +135,10 @@ public class GameView extends View implements TimerAction{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // On met une couleur de fond
-        canvas.drawColor(0xff000077);
+        // On met une IMAGE de fond
+
+//        canvas.drawColor(0xff000077);
+
 
         // On choisit la transformation à appliquer à la vue i.e. la position
         // de la "camera"
@@ -187,7 +187,7 @@ public class GameView extends View implements TimerAction{
         RectF dst = new RectF(0,0,w,h);
 
         // Calcul de la transformation désirée (et de son inverse)
-        transform.setRectToRect(src,dst, Matrix.ScaleToFit.CENTER);
+        transform.setRectToRect(src,dst, Matrix.ScaleToFit.START);
         transform.invert(reverse);
     }
 
