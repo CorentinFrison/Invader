@@ -16,6 +16,7 @@ class Canon extends Sprite {
     private final int dxLaser;
     private final int dyLaser;
     float vx = 0;
+    private Canon canon;
 
     Canon(int id, float x, float y, List<Projectile> laser) {
         super(id, x, y);
@@ -46,4 +47,6 @@ class Canon extends Sprite {
         laser.add(new Projectile(R.mipmap.laser,x+dxLaser,y+dyLaser,-20));
 
     }
+
+
 }
