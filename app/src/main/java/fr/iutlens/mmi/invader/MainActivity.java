@@ -3,6 +3,7 @@ package fr.iutlens.mmi.invader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import fr.iutlens.mmi.invader.utils.Pad;
 
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         Pad pad = findViewById(R.id.pad);
 
         gameView.setPad(pad);
+
+        TextView vieView = (TextView) findViewById(R.id.vieView);
+        gameView.setVieView(vieView);
     }
 
 /*    public void onLeft(View view) {
