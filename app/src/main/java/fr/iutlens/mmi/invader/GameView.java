@@ -104,10 +104,19 @@ public class GameView extends View implements TimerAction{
         laser = new ArrayList<>();
         shield = new ArrayList<>();
 
+        for(int h=200;h<=1600;h+=200) {
+            for (int i = 0; i < 30; i++) {
+                for (int j = 0; j < 10; j++) {
+                    shield.add(new Shield(R.mipmap.carre, h + i * 3, 2000 + j * 3));
+                }
+            }
+        }
 
-        for(int i = 0; i <20; i++) {
-            for (int j = 0; j < 8; j++) {
-                shield.add(new Shield(R.mipmap.carre, 200 + i * 4, 1800 + j * 4));
+        for(int h=300;h<=1600;h+=300) {
+            for (int i = 0; i < 30; i++) {
+                for (int j = 0; j < 10; j++) {
+                    shield.add(new Shield(R.mipmap.carre, h + i * 2, 1800 + j * 2));
+                }
             }
         }
 
