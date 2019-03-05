@@ -113,7 +113,7 @@ public class GameView extends View implements TimerAction{
         }
 
         for(int h=300;h<=1600;h+=300) {
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i < 40; i++) {
                 for (int j = 0; j < 10; j++) {
                     shield.add(new Shield(R.mipmap.carre, h + i * 2, 1800 + j * 2));
                 }
