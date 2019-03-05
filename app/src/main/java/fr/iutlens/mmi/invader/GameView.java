@@ -6,13 +6,11 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
 
 import fr.iutlens.mmi.invader.utils.Pad;
 import fr.iutlens.mmi.invader.utils.RefreshHandler;
@@ -40,6 +38,30 @@ public class GameView extends View implements TimerAction{
     private List<Projectile> laser;
     private Pad pad;
     private ArrayList<Shield> shield;
+    int vie;
+    private TextView textView;
+    private TextView vieView;
+
+
+    public int getVie() {
+        return vie;
+    }
+
+    public void setVie(int vie) {
+        this.vie = this.vie - vie;
+        if (vieView != null)
+        {
+            vieView.setText(":"+this.vie);
+            gameover();
+        }
+
+    }
+
+    private void gameover() {
+        if(this.vie==0){
+
+        }
+    }
 
 
     public GameView(Context context) {
@@ -93,6 +115,8 @@ public class GameView extends View implements TimerAction{
         canon = new Canon(R.mipmap.newcanon,800, 2200,laser);
 
 
+        vie = 10;
+
 //        hero = new Hero(R.drawable.running_rabbit,SPEED);
 
 
@@ -130,7 +154,12 @@ public class GameView extends View implements TimerAction{
 
             testIntersection();
 
-            canon.act();
+            canon.testIntersection(missile);
+
+            if(canon.act()){
+                setVie(1);
+            }
+
 
             act(missile);
             act(laser);
@@ -139,6 +168,8 @@ public class GameView extends View implements TimerAction{
             invalidate(); // demande à rafraichir la vue
         }
     }
+
+
 
     private void testIntersection() {
         for(Projectile p : missile){
@@ -245,4 +276,12 @@ public class GameView extends View implements TimerAction{
         this.pad = pad;
     }
 
+    public void setVieView(TextView vieView) {
+        this.vieView = vieView;
+        setVie(0);
+    }
+
+    public TextView getVieView() {
+        return vieView;
+    }
 }
