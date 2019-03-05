@@ -21,7 +21,7 @@ class Canon extends Sprite {
     Canon(int id, float x, float y, List<Projectile> laser) {
         super(id, x, y);
         this.laser = laser;
-        final SpriteSheet laserSprite = SpriteSheet.get(R.mipmap.laser);
+        final SpriteSheet laserSprite = SpriteSheet.get(R.mipmap.newlaser);
         dxLaser = sprite.w/2- laserSprite.w/2;
         dyLaser = -laserSprite.h;
     }
@@ -44,7 +44,7 @@ class Canon extends Sprite {
 
 
     public void fire() {
-        laser.add(new Projectile(R.mipmap.laser,x+dxLaser,y+dyLaser,-20));
+        laser.add(new Projectile(R.mipmap.newlaser,x+dxLaser,y+dyLaser,-20));
 
     }
 

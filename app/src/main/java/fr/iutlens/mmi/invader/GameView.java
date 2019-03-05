@@ -68,10 +68,10 @@ public class GameView extends View implements TimerAction{
     private void init(AttributeSet attrs, int defStyle) {
 
         // Chargement des feuilles de sprites
-        SpriteSheet.register(R.mipmap.alien,2,1,this.getContext());
+        SpriteSheet.register(R.mipmap.newaliens,2,1,this.getContext());
         SpriteSheet.register(R.mipmap.missile,4,1,this.getContext());
-        SpriteSheet.register(R.mipmap.laser,1,1,this.getContext());
-        SpriteSheet.register(R.mipmap.canon,1,1,this.getContext());
+        SpriteSheet.register(R.mipmap.newlaser,2,1,this.getContext());
+        SpriteSheet.register(R.mipmap.newcanon,1,1,this.getContext());
         SpriteSheet.register(R.mipmap.carre,1,1,this.getContext());
 
 
@@ -89,8 +89,8 @@ public class GameView extends View implements TimerAction{
             }
         }
 
-        armada = new Armada(R.mipmap.alien,missile);
-        canon = new Canon(R.mipmap.canon,800, 2200,laser);
+        armada = new Armada(R.mipmap.newaliens,missile);
+        canon = new Canon(R.mipmap.newcanon,800, 2200,laser);
 
 
 //        hero = new Hero(R.drawable.running_rabbit,SPEED);
