@@ -1,6 +1,7 @@
 package fr.iutlens.mmi.invader;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.RectF;
@@ -161,12 +162,17 @@ public class GameView extends View implements TimerAction{
                 canon.setDirection(pad.getDx());
             }
 
+
             testIntersection();
 
             canon.testIntersection(missile);
 
             if(canon.act()){
                 setVie(1);
+            }
+            if(vie==0){
+                Intent intent = new Intent(getContext(),GameOver_Activity.class);
+                startActivity(intent);
             }
 
 
