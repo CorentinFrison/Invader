@@ -1,7 +1,9 @@
 package fr.iutlens.mmi.invader;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
