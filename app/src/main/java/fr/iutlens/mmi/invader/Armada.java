@@ -18,25 +18,43 @@ class Armada extends Sprite{
     private final List<Projectile> missile;
     private final int missileDx;
     private final int missileDy;
+    private int newSpeed_x = 0;
+    private int newSpeed_y =0;
+    private int level=0;
     private int speed_x;
     private int speed_y;
+    private int max_speed;
 
     public Armada(int id, List<Projectile> missile) {
         super(id,0,0);
         this.missile = missile;
         alien = new ArrayList<>();
 
+        createAliens(id);
+        max_speed = 8;
+
+        this.speed_x =max_speed;
+        this.speed_y =0;
+
+        missileDx = sprite.w/2;
+        missileDy = sprite.h;
+    }
+
+    private void createAliens(int id) {
         for(int i = 0; i <6; ++i){
             for(int j= 0; j< 5; ++j){
                 alien.add(new Alien(id,i*200,j*140));
             }
         }
+    }
 
-        this.speed_x =8;
+    public void newLevel() {
+
+        this.newSpeed_x+=10;
+        this.max_speed += newSpeed_x;
+
+        this.speed_x =max_speed;
         this.speed_y =0;
-
-        missileDx = sprite.w/2;
-        missileDy = sprite.h;
     }
 
     @Override
@@ -60,7 +78,8 @@ class Armada extends Sprite{
                 speed_y = 0;
             }
         } else if (speed_x +bounds.right >= GameView.SIZE_X|| bounds.left+speed_x < 0){
-            speed_y = 8;
+            max_speed = 8;
+            speed_y = max_speed;
             state = 0;
         }
 
@@ -74,6 +93,11 @@ class Armada extends Sprite{
             else if (Math.random()<0.005f){
                 missile.add(new Projectile(R.mipmap.missile,s.x+missileDx,s.y+missileDy,+15));
             }
+        }
+
+        if (alien.isEmpty()){
+            createAliens(R.mipmap.alien);
+            newLevel();
         }
 
         return false;
