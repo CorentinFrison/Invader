@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,6 +45,7 @@ public class GameView extends View implements TimerAction{
     int score;
     private TextView vieView;
     private TextView scoreView;
+
 
 
     public int getVie() {
@@ -189,6 +191,12 @@ public class GameView extends View implements TimerAction{
             }
             if(armada.getLevelup()){
                 setScoreView(scoreView);
+                CharSequence text = "level up!";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(getContext(), text, duration);
+                toast.show();
+
             }
 
 
