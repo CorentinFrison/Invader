@@ -66,9 +66,7 @@ public class GameView extends View implements TimerAction{
 
 
     private void gameover() {
-        if(this.vie==0){
 
-        }
     }
 
 
@@ -179,6 +177,7 @@ public class GameView extends View implements TimerAction{
             }
 
             if(vie==0){
+
                 Intent intent = new Intent(getContext(),GameOver_Activity.class);
                 getContext().startActivity(intent); //getContext() Pour demarré une activité dans le gameview
             }
@@ -191,6 +190,7 @@ public class GameView extends View implements TimerAction{
             if(armada.newLevel()){
                 setScoreView(scoreView);
             }
+
 
             act(missile);
             act(laser);
