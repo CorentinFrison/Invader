@@ -117,6 +117,15 @@ class Armada extends Sprite{
         return result;
     }
 
+    public boolean ArmadaOutOfScreen(){
+        RectF bounds = getBoundingBox();
+        if(bounds.bottom > GameView.SIZE_Y){
+            return true;
+        };
+        return false;
+    }
+
+
     public void testIntersection(List<Projectile> laser) {
         for(Projectile p : laser){
             RectF bbox = p.getBoundingBox();
