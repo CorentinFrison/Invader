@@ -48,13 +48,16 @@ class Armada extends Sprite{
         }
     }
 
-    public void newLevel() {
+    public boolean newLevel() {
+            boolean LevelUp = false;
+            this.newSpeed_x+=10;
+            this.max_speed += newSpeed_x;
 
-        this.newSpeed_x+=10;
-        this.max_speed += newSpeed_x;
+            this.speed_x =max_speed;
+            this.speed_y =0;
 
-        this.speed_x =max_speed;
-        this.speed_y =0;
+            return true;
+
     }
 
     @Override
@@ -98,6 +101,7 @@ class Armada extends Sprite{
         if (alien.isEmpty()){
             createAliens(R.mipmap.alien);
             newLevel();
+
         }
 
         return false;
