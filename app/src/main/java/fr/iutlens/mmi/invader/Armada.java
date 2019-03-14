@@ -24,6 +24,7 @@ class Armada extends Sprite{
     private int speed_x;
     private int speed_y;
     private int max_speed;
+    boolean LevelUp = false;
 
     public Armada(int id, List<Projectile> missile) {
         super(id,0,0);
@@ -49,12 +50,18 @@ class Armada extends Sprite{
     }
 
     public void newLevel() {
+            LevelUp= true;
+            setLevelup(LevelUp);
+            LevelUp = false;
+            createAliens(R.mipmap.alien);
+            this.newSpeed_x+=10;
+            this.max_speed += newSpeed_x;
 
-        this.newSpeed_x+=10;
-        this.max_speed += newSpeed_x;
+            this.speed_x =max_speed;
+            this.speed_y =0;
 
-        this.speed_x =max_speed;
-        this.speed_y =0;
+
+
     }
 
     @Override
@@ -68,6 +75,11 @@ class Armada extends Sprite{
     @Override
     public boolean act() {
 
+        if (alien.isEmpty()){
+            newLevel();
+            return false;
+        }
+
         RectF bounds = getBoundingBox();
         ++state;
 
@@ -78,7 +90,7 @@ class Armada extends Sprite{
                 speed_y = 0;
             }
         } else if (speed_x +bounds.right >= GameView.SIZE_X|| bounds.left+speed_x < 0){
-            max_speed = 8;
+            //max_speed = 8;
             speed_y = max_speed;
             state = 0;
         }
@@ -95,15 +107,14 @@ class Armada extends Sprite{
             }
         }
 
-        if (alien.isEmpty()){
-            createAliens(R.mipmap.alien);
-            newLevel();
-        }
 
         return false;
     }
 
     public RectF getBoundingBox() {
+        if (alien.isEmpty()){
+            return null;
+        }
         RectF result = null;
         for (Alien s: alien
                 ) {
@@ -116,6 +127,9 @@ class Armada extends Sprite{
     }
 
     public boolean ArmadaOutOfScreen(){
+        if(alien.isEmpty()){
+            return false;
+        }
         RectF bounds = getBoundingBox();
         if(bounds.bottom > GameView.SIZE_Y){
             return true;
@@ -135,5 +149,12 @@ class Armada extends Sprite{
             }
         }
 
+    }
+
+    public void setLevelup(boolean levelup) {
+        this.LevelUp = levelup;
+    }
+    public boolean getLevelup( ) {
+        return LevelUp;
     }
 }

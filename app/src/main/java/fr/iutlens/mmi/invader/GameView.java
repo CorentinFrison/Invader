@@ -59,7 +59,7 @@ public class GameView extends View implements TimerAction{
         }
 
     }
-    public void setScore(int score) {
+    public void setScore() {
         this.score += 1;
     }
 
@@ -187,6 +187,9 @@ public class GameView extends View implements TimerAction{
                 Intent intent = new Intent(getContext(),GameOver_Activity.class);
                 getContext().startActivity(intent); //getContext() Pour demarré une activité dans le gameview
             }
+            if(armada.getLevelup()){
+                setScoreView(scoreView);
+            }
 
 
             act(missile);
@@ -310,7 +313,7 @@ public class GameView extends View implements TimerAction{
     }
     public void setScoreView(TextView vieView) {
         this.scoreView = scoreView;
-        setScore(0);
+        setScore();
     }
 
 
