@@ -58,9 +58,7 @@ public class GameView extends View implements TimerAction{
     }
 
     private void gameover() {
-        if(this.vie==0){
 
-        }
     }
 
 
@@ -167,6 +165,10 @@ public class GameView extends View implements TimerAction{
 
             if(canon.act()){
                 setVie(1);
+            }
+
+            if(vie==0){
+                gameover();
             }
 
 
