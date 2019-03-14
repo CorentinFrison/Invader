@@ -12,7 +12,7 @@ public class GameOver_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over_);
     }
-    public void onClick(View v) {
+    public void onClickReplay(View v) {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
