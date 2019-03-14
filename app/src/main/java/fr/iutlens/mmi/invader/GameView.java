@@ -46,6 +46,7 @@ public class GameView extends View implements TimerAction{
     private TextView scoreView;
 
 
+
     public int getVie() {
         return vie;
     }

@@ -27,6 +27,12 @@ class Armada extends Sprite{
     private int speed_y;
     private int max_speed;
 
+
+
+
+
+
+
     public Armada(int id, List<Projectile> missile) {
         super(id,0,0);
         this.missile = missile;
@@ -70,6 +76,7 @@ class Armada extends Sprite{
     @Override
     public boolean act() {
 
+
         RectF bounds = getBoundingBox();
         ++state;
 
@@ -99,6 +106,7 @@ class Armada extends Sprite{
 
         if (alien.isEmpty()){
             createAliens(R.mipmap.alien);
+
             newLevel();
         }
 
@@ -138,4 +146,7 @@ class Armada extends Sprite{
         }
 
     }
+
+
+
 }
