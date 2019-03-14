@@ -71,6 +71,11 @@ class Armada extends Sprite{
     @Override
     public boolean act() {
 
+        if (alien.isEmpty()){
+            createAliens(R.mipmap.alien);
+            newLevel();
+
+        }
         RectF bounds = getBoundingBox();
         ++state;
 
@@ -81,7 +86,7 @@ class Armada extends Sprite{
                 speed_y = 0;
             }
         } else if (speed_x +bounds.right >= GameView.SIZE_X|| bounds.left+speed_x < 0){
-            max_speed = 8;
+            //max_speed = 8;
             speed_y = max_speed;
             state = 0;
         }
@@ -98,11 +103,6 @@ class Armada extends Sprite{
             }
         }
 
-        if (alien.isEmpty()){
-            createAliens(R.mipmap.alien);
-            newLevel();
-
-        }
 
         return false;
     }

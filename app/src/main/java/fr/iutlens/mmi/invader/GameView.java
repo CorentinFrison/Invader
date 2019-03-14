@@ -187,9 +187,9 @@ public class GameView extends View implements TimerAction{
                 Intent intent = new Intent(getContext(),GameOver_Activity.class);
                 getContext().startActivity(intent); //getContext() Pour demarré une activité dans le gameview
             }
-            if(armada.newLevel()){
+/*            if(armada.newLevel()){
                 setScoreView(scoreView);
-            }
+            }*/
 
 
             act(missile);
