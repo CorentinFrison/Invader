@@ -53,7 +53,7 @@ class Armada extends Sprite{
             LevelUp= true;
             setLevelup(LevelUp);
             LevelUp = false;
-            createAliens(R.mipmap.alien);
+            createAliens(R.mipmap.newaliens);
             this.newSpeed_x+=10;
             this.max_speed += newSpeed_x;
 
@@ -112,12 +112,8 @@ class Armada extends Sprite{
     }
 
     public RectF getBoundingBox() {
-        if (alien.isEmpty()){
-            return null;
-        }
         RectF result = null;
-        for (Alien s: alien
-                ) {
+        for (Alien s: alien) {
             final RectF boundingBox = s.getBoundingBox();
             if (result == null) result = boundingBox;
            else result.union(boundingBox);
@@ -127,11 +123,8 @@ class Armada extends Sprite{
     }
 
     public boolean ArmadaOutOfScreen(){
-        if(alien.isEmpty()){
-            return false;
-        }
         RectF bounds = getBoundingBox();
-        if(bounds.bottom > GameView.SIZE_Y){
+        if(bounds != null && bounds.bottom > GameView.SIZE_Y){
             return true;
         };
         return false;
