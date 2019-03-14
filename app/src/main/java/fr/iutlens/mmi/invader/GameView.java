@@ -39,9 +39,11 @@ public class GameView extends View implements TimerAction{
     private List<Projectile> laser;
     private Pad pad;
     private ArrayList<Shield> shield;
-    int vie;
     private TextView textView;
+    int vie;
+    int score;
     private TextView vieView;
+    private TextView scoreView;
 
 
     public int getVie() {
@@ -57,6 +59,11 @@ public class GameView extends View implements TimerAction{
         }
 
     }
+    public void setScore(int score) {
+        this.score += 1;
+    }
+
+
 
     private void gameover() {
         if(this.vie==0){
@@ -106,17 +113,17 @@ public class GameView extends View implements TimerAction{
         shield = new ArrayList<>();
 
         for(int h=200;h<=1600;h+=200) {
-            for (int i = 0; i < 30; i++) {
-                for (int j = 0; j < 10; j++) {
-                    shield.add(new Shield(R.mipmap.carre, h + i * 3, 2000 + j * 3));
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 1; j++) {
+                    shield.add(new Shield(R.mipmap.carre, h + i * 30, 2000 + j * 3));
                 }
             }
         }
 
         for(int h=300;h<=1600;h+=300) {
-            for (int i = 0; i < 40; i++) {
-                for (int j = 0; j < 10; j++) {
-                    shield.add(new Shield(R.mipmap.carre, h + i * 2, 1800 + j * 2));
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 1; j++) {
+                    shield.add(new Shield(R.mipmap.carre, h + i * 20, 1800 + j * 2));
                 }
             }
         }
@@ -124,7 +131,7 @@ public class GameView extends View implements TimerAction{
         armada = new Armada(R.mipmap.newaliens,missile);
         canon = new Canon(R.mipmap.newcanon,800, 2200,laser);
 
-
+        score = 0;
         vie = 10;
 
 //        hero = new Hero(R.drawable.running_rabbit,SPEED);
@@ -170,11 +177,17 @@ public class GameView extends View implements TimerAction{
             if(canon.act()){
                 setVie(1);
             }
+
             if(vie==0){
                 Intent intent = new Intent(getContext(),GameOver_Activity.class);
-                startActivity(intent);
+                getContext().startActivity(intent); //getContext() Pour demarré une activité dans le gameview
             }
 
+
+            if(armada.ArmadaOutOfScreen()){
+                Intent intent = new Intent(getContext(),GameOver_Activity.class);
+                getContext().startActivity(intent); //getContext() Pour demarré une activité dans le gameview
+            }
 
             act(missile);
             act(laser);
@@ -295,6 +308,11 @@ public class GameView extends View implements TimerAction{
         this.vieView = vieView;
         setVie(0);
     }
+    public void setScoreView(TextView vieView) {
+        this.scoreView = scoreView;
+        setScore(0);
+    }
+
 
     public TextView getVieView() {
         return vieView;
